@@ -1,0 +1,25 @@
+table {
+  margin: 0 auto;
+  border: 3px solid red;
+  width: 80vw;
+}
+th {
+  border: 1px solid grey;
+  padding: 10px;
+}
+td {
+  border: 1px solid grey;
+  text-align: end;
+  padding: 5px;
+}
+.align {
+  display: flex;
+  align-items: center;
+}
+img {
+  width: 20px;
+  //   align-self: center;
+}
+.hidden {
+  border: 0;
+}

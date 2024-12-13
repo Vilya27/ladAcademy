@@ -1,11 +1,14 @@
-import { Button, Profile } from "@/components";
+import { Button, Profile, Product } from "@/components";
+import React from "react";
 
 const App = () => {
+  const isLoggedIn = true;
   return (
-    <>
-      <Button />
-      <Profile />
-    </>
+    <React.Fragment>
+      <Product />
+      {/* {isLoggedIn && <Profile />}
+      {isLoggedIn ? <Button /> : "no"} */}
+    </React.Fragment>
   );
 };
 
