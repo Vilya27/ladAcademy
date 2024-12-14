@@ -17,8 +17,6 @@ const Profile = () => {
         style={{ width: "100px" }}
       />
       {user.firstName}
-      {user.lastName[0]}
-      {user.age}
     </div>
   );
 };

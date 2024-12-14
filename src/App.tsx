@@ -1,4 +1,10 @@
-import { Button, Profile, ProductCard, ProductCatalog } from "@/components";
+import {
+  Button,
+  Profile,
+  ProductCard,
+  ProductCatalog,
+  Layout,
+} from "@/components";
 import React from "react";
 
 const App = () => {
@@ -44,7 +50,9 @@ const App = () => {
       >
         Кнопка
       </Button>
-      <ProductCatalog products={products} />
+      {/* <Profile /> */}
+      <Layout>Check</Layout>
+      {/* <ProductCatalog products={products} /> */}
     </React.Fragment>
   );
 };
