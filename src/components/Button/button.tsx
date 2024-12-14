@@ -1,14 +1,16 @@
 type ButtonProps = {
   children: React.ReactNode;
+  message?: string;
+  onClick?: () => void;
 };
-const Button = ({ children }: ButtonProps) => {
+const Button = ({ children, onClick, message = "Работает" }: ButtonProps) => {
   const handleClick = () => {
-    alert("Работает");
+    alert(message);
   };
 
   return (
     <button
-      onClick={handleClick}
+      onClick={onClick}
       // onClick={() => {
       //   alert("Работает");
       // }}

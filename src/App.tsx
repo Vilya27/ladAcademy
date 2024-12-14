@@ -29,8 +29,22 @@ const App = () => {
     <React.Fragment>
       {/* {isLoggedIn && <Profile />}
       {isLoggedIn ? <Button /> : "no"} */}
+      <Button
+        onClick={() => {
+          alert("Кнопка1");
+        }}
+        message="Этт новое сообщение"
+      >
+        Кнопка
+      </Button>
+      <Button
+        onClick={() => {
+          alert("Кнопка2");
+        }}
+      >
+        Кнопка
+      </Button>
       <ProductCatalog products={products} />
-      <Button>Кнопка</Button>
     </React.Fragment>
   );
 };

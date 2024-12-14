@@ -5,9 +5,14 @@ import { Product } from "@/types/product";
 type ProductProps = {
   product: Product;
   type?: "default" | "sale";
+  onAddCard: () => void;
 };
 
-const ProductCard = ({ product, type = "default" }: ProductProps) => {
+const ProductCard = ({
+  product,
+  onAddCard,
+  type = "default",
+}: ProductProps) => {
   // const { product } = props;
   // if (product.id != 1) {
   //   return "asdfas";
@@ -49,6 +54,7 @@ const ProductCard = ({ product, type = "default" }: ProductProps) => {
             </td>
           </tr>
         </tbody>
+        <button onClick={onAddCard}>Добавить в корзину</button>
       </table>
     </>
   );

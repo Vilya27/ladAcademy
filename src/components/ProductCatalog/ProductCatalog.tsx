@@ -4,10 +4,17 @@ type ProductCatalogProps = {
   products: Array<Product>;
 };
 const ProductCatalog = ({ products }: ProductCatalogProps) => {
+  const handleAddCard = () => {
+    alert("sdjghfjks");
+  };
   return (
     <>
       {products.map((product) => (
-        <ProductCard product={product} key={product.id} />
+        <ProductCard
+          product={product}
+          key={product.id}
+          onAddCard={handleAddCard}
+        />
       ))}
     </>
   );
