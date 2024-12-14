@@ -1,16 +1,19 @@
 import classes from "./Product.module.scss";
 import { FC } from "react";
-import { Product } from "@/components/types/product";
+import { Product } from "@/types/product";
 
 type ProductProps = {
   product: Product;
+  type?: "default" | "sale";
 };
 
-const ProductCard = ({ product }: ProductProps) => {
+const ProductCard = ({ product, type = "default" }: ProductProps) => {
   // const { product } = props;
   // if (product.id != 1) {
   //   return "asdfas";
   // }
+  const { price, isFavorite, rating, discount } = product;
+  console.log(type);
   const imgHeartRed =
     "https://i.pinimg.com/736x/c6/ad/36/c6ad365e4e02ded1e1ec801a3ec03fad.jpg";
   const imgHeartNone =
@@ -34,11 +37,11 @@ const ProductCard = ({ product }: ProductProps) => {
                 {product.name}
               </div>
             </td>
-            <td>{product.price}</td>
-            <td>{product.discount}</td>
-            <td>{product.rating}</td>
+            <td>{price}</td>
+            <td>{discount}</td>
+            <td>{rating}</td>
             <td className={classes.hidden}>
-              {product.isFavorite ? (
+              {isFavorite ? (
                 <img src={imgHeartRed} alt="нравится" />
               ) : (
                 <img src={imgHeartNone} alt="не нравится" />

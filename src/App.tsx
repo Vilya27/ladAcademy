@@ -1,4 +1,4 @@
-import { Button, Profile, ProductCard } from "@/components";
+import { Button, Profile, ProductCard, ProductCatalog } from "@/components";
 import React from "react";
 
 const App = () => {
@@ -27,11 +27,9 @@ const App = () => {
   ];
   return (
     <React.Fragment>
-      {products.map((product) => (
-        <ProductCard product={product} key={product.id} />
-      ))}
       {/* {isLoggedIn && <Profile />}
       {isLoggedIn ? <Button /> : "no"} */}
+      <ProductCatalog products={products} />
       <Button>Кнопка</Button>
     </React.Fragment>
   );
