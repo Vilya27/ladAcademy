@@ -5,6 +5,7 @@ import {
   ProductCatalog,
   Layout,
 } from "@/components";
+import { CatalogPage } from "@/pages/index";
 import React from "react";
 
 const App = () => {
@@ -52,6 +53,8 @@ const App = () => {
       </Button>
       {/* <Profile /> */}
       <Layout>Check</Layout>
+      <CatalogPage />
+      <ProductCatalog products={products} />
       {/* <ProductCatalog products={products} /> */}
     </React.Fragment>
   );
