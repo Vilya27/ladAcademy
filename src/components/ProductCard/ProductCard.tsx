@@ -1,6 +1,8 @@
 import classes from "./Product.module.scss";
 import { FC, useState } from "react";
 import { Product } from "@/types/product";
+import { Button } from "@/components";
+import { default as ChangeCount } from "./components/ChangeCount";
 
 type ProductProps = {
   product: Product;
@@ -61,13 +63,15 @@ const ProductCard = ({
             </td>
           </tr>
           <tr>
-            <td>
-              <button onClick={onAddCard}>Добавить в корзину</button>
-              <div>
-                <button onClick={handleAddCard}> + </button>
-                {count}
-                <button onClick={handleDecrementCard}> - </button>
-              </div>
+            <td colSpan={4}>
+              <Button onClick={handleAddCard}>Добавить в корзину</Button>
+              {count > 0 && (
+                <ChangeCount
+                  count={count}
+                  onAdd={handleAddCard}
+                  onDecrement={handleDecrementCard}
+                />
+              )}
             </td>
           </tr>
         </tbody>

@@ -5,7 +5,7 @@ type ProductCatalogProps = {
 };
 const ProductCatalog = ({ products }: ProductCatalogProps) => {
   const handleAddCard = () => {
-    // alert("Добавлено в корзину");
+    alert("Добавлено в корзину");
   };
   return (
     <>
