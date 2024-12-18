@@ -1,5 +1,5 @@
 import classes from "./Product.module.scss";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Product } from "@/types/product";
 
 type ProductProps = {
@@ -13,10 +13,17 @@ const ProductCard = ({
   onAddCard,
   type = "default",
 }: ProductProps) => {
-  // const { product } = props;
-  // if (product.id != 1) {
-  //   return "asdfas";
-  // }
+  const [count, setCount] = useState<number>(0);
+  const handleAddCard = () => {
+    setCount((prevState) => {
+      return prevState + 1;
+    });
+  };
+  const handleDecrementCard = () => {
+    setCount((prevState) => {
+      return prevState - 1;
+    });
+  };
   const { price, isFavorite, rating, discount } = product;
   console.log(type);
   const imgHeartRed =
@@ -53,8 +60,17 @@ const ProductCard = ({
               )}
             </td>
           </tr>
+          <tr>
+            <td>
+              <button onClick={onAddCard}>Добавить в корзину</button>
+              <div>
+                <button onClick={handleAddCard}> + </button>
+                {count}
+                <button onClick={handleDecrementCard}> - </button>
+              </div>
+            </td>
+          </tr>
         </tbody>
-        <button onClick={onAddCard}>Добавить в корзину</button>
       </table>
     </>
   );
