@@ -1,28 +1,42 @@
-import { useReducer } from "react";
-const initialState = 0;
-enum CounterAction {
-    INCREMENT = "INCREMENT",
-    DECREMENT = "DECREMENT",
-    RESET = "RESET",
-}
+import { useReducer, useState } from "react";
+import { initialState } from "./initialState";
+import { counterReducer } from "./reducer";
+import { incrementCounter, decrementCounter, resetCounter } from "./actions";
 const Counter = () => {
-    const [state, dispatch] = useReducer ((prevState, action) => {
-        switch(action.type) {
-            case CounterAction.INCREMENT: 
-            return prevState + 1;
-            case CounterAction.DECREMENT: 
-            return prevState - 1;
-            case: CounterAction.RESET:
-            return 0;
-            default:
-                return prevState;
-        } 
-    }, initialState);
-    return (<>
+  const [state, dispatch] = useReducer(counterReducer, initialState);
+  const [value, setValue] = useState<number>(0);
+  return (
     <div>
-        {state}
-        <button onClick=({dispatch({type: CounterAction.INCREMENT})}>-</button>
-        <button onClick=({dispatch({type: CounterAction.DECREMENT})})>+</button>
+      {state.counter}
+      <input
+        type="number"
+        value={value}
+        onChange={(event) => {
+          setValue(Number(event.target.value));
+        }}
+      />
+      <button
+        onClick={() => {
+          dispatch(incrementCounter(value));
+        }}
+      >
+        +
+      </button>
+      <button
+        onClick={() => {
+          dispatch(decrementCounter(value));
+        }}
+      >
+        -
+      </button>
+      <button
+        onClick={() => {
+          dispatch(resetCounter());
+        }}
+      >
+        Clear
+      </button>
     </div>
-    </>)
-}
+  );
+};
+export default Counter;
