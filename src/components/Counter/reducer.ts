@@ -1,18 +1,20 @@
 import { Reducer } from "react";
 import { CounterAction, CounterActionType, CounterType } from "./types";
+import { ImmerReducer } from "use-immer";
+import { initialState } from "./initialState";
 
-export const counterReducer: Reducer<CounterType, CounterAction> = (
-  state,
+export const counterReducer: ImmerReducer<CounterType, CounterAction> = (
+  draftState,
   action
 ) => {
   switch (action.type) {
     case CounterActionType.INCREMENT:
-      return { ...state, counter: state.counter + action.payload };
+      draftState.counter += action.payload;
+      break;
     case CounterActionType.DECREMENT:
-      return { ...state, counter: state.counter - action.payload };
+      draftState.counter -= action.payload;
+      break;
     case CounterActionType.RESET:
-      return { ...state, counter: 0 };
-    default:
-      return state;
+      return initialState;
   }
 };

@@ -1,9 +1,10 @@
 import { useReducer, useState } from "react";
+import { useImmerReducer } from "use-immer";
 import { initialState } from "./initialState";
 import { counterReducer } from "./reducer";
 import { incrementCounter, decrementCounter, resetCounter } from "./actions";
 const Counter = () => {
-  const [state, dispatch] = useReducer(counterReducer, initialState);
+  const [state, dispatch] = useImmerReducer(counterReducer, initialState);
   const [value, setValue] = useState<number>(0);
   return (
     <div>
