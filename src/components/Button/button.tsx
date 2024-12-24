@@ -3,20 +3,7 @@ type ButtonProps = {
   message?: string;
   onClick?: () => void;
 };
-const Button = ({ children, onClick, message = "Работает" }: ButtonProps) => {
-  const handleClick = () => {
-    alert(message);
-  };
-
-  return (
-    <button
-      onClick={onClick}
-      // onClick={() => {
-      //   alert("Работает");
-      // }}
-    >
-      {children}
-    </button>
-  );
+const Button = ({ children, onClick }: ButtonProps) => {
+  return <button onClick={onClick}>{children}</button>;
 };
 export { Button };

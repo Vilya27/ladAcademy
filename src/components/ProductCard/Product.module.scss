@@ -1,4 +1,4 @@
-table {
+.productCard {
   margin: 0 auto;
   border: 3px solid red;
   width: 80vw;
@@ -9,16 +9,21 @@ th {
 }
 td {
   border: 1px solid grey;
-  text-align: end;
+  text-align: center;
   padding: 5px;
 }
 .align {
   display: flex;
   align-items: center;
 }
-img {
-  width: 20px;
+.iconProduct {
+  width: 30px;
+  height: auto;
   //   align-self: center;
+}
+.favoriteProduct {
+  width: 20px;
+  height: auto;
 }
 .hidden {
   border: 0;

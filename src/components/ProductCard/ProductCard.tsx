@@ -7,34 +7,36 @@ import { default as ChangeCount } from "./components/ChangeCount";
 type ProductProps = {
   product: Product;
   type?: "default" | "sale";
-  onAddCard: () => void;
+  onChangeCard: (product: Product) => void;
 };
 
-const ProductCard = ({
-  product,
-  onAddCard,
-  type = "default",
-}: ProductProps) => {
-  const [count, setCount] = useState<number>(0);
+const ProductCard = ({ product, onChangeCard }: ProductProps) => {
+  const { price, isFavorite, rating, discount, count } = product;
   const handleAddCard = () => {
-    setCount((prevState) => {
-      return prevState + 1;
+    onChangeCard({
+      ...product,
+      count: product.count ? product.count + 1 : 1,
     });
   };
   const handleDecrementCard = () => {
-    setCount((prevState) => {
-      return prevState - 1;
+    onChangeCard({
+      ...product,
+      count: product.count && product.count > 0 ? product.count - 1 : 0,
     });
   };
-  const { price, isFavorite, rating, discount } = product;
-  console.log(type);
+  const handleFavoriteClick = () => {
+    onChangeCard({
+      ...product,
+      isFavorite: !product.isFavorite,
+    });
+  };
   const imgHeartRed =
     "https://i.pinimg.com/736x/c6/ad/36/c6ad365e4e02ded1e1ec801a3ec03fad.jpg";
   const imgHeartNone =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Heart_empty_font_awesome.svg/2048px-Heart_empty_font_awesome.svg.png";
   return (
     <>
-      <table className={classes.table}>
+      <table className={classes.productCard}>
         <thead>
           <tr>
             <th>Название</th>
@@ -47,7 +49,11 @@ const ProductCard = ({
           <tr>
             <td>
               <div className={classes.align}>
-                <img src={product.imageUrl} alt="наручные часы" />
+                <img
+                  src={product.imageUrl}
+                  alt="наручные часы"
+                  className={classes.iconProduct}
+                />
                 {product.name}
               </div>
             </td>
@@ -56,22 +62,34 @@ const ProductCard = ({
             <td>{rating}</td>
             <td className={classes.hidden}>
               {isFavorite ? (
-                <img src={imgHeartRed} alt="нравится" />
+                <Button onClick={handleFavoriteClick}>
+                  <img
+                    src={imgHeartRed}
+                    alt="нравится"
+                    className={classes.favoriteProduct}
+                  />
+                </Button>
               ) : (
-                <img src={imgHeartNone} alt="не нравится" />
+                <Button onClick={handleFavoriteClick}>
+                  <img
+                    src={imgHeartNone}
+                    alt="не нравится"
+                    className={classes.favoriteProduct}
+                  />
+                </Button>
               )}
             </td>
           </tr>
           <tr>
             <td colSpan={4}>
               <Button onClick={handleAddCard}>Добавить в корзину</Button>
-              {count > 0 && (
+              {count && count > 0 ? (
                 <ChangeCount
                   count={count}
                   onAdd={handleAddCard}
                   onDecrement={handleDecrementCard}
                 />
-              )}
+              ) : null}
             </td>
           </tr>
         </tbody>

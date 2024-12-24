@@ -3,3 +3,4 @@ export { default as Profile } from "./Profile/Profile";
 export { default as ProductCard } from "./ProductCard/ProductCard";
 export { default as ProductCatalog } from "./ProductCatalog/ProductCatalog";
 export { default as Layout } from "../layout/PublicLayout";
+export { default as Cart } from "./Cart/Cart";
