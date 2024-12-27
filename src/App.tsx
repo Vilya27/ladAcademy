@@ -7,8 +7,8 @@ import { default as Counter } from "@/components/Counter/Counter";
 const App = () => {
   return (
     <React.Fragment>
-      {/* <CatalogPage /> */}
-      <Counter />
+      <CatalogPage />
+      {/* <Counter /> */}
     </React.Fragment>
   );
 };

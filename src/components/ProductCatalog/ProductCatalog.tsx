@@ -1,22 +1,19 @@
 import { ProductCard } from "@/components";
-import { useState } from "react";
 import { Product } from "@/types/product";
-import { default as ChangeCount } from "@/components/ProductCard/components";
+import { CardAction } from "@/pages/components/CatalogPage/types";
+
 type ProductCatalogProps = {
   products: Array<Product>;
-  handleChangeCard: (product: Product) => void;
+  dispatch: React.Dispatch<CardAction>;
 };
-const ProductCatalog = ({
-  products,
-  handleChangeCard,
-}: ProductCatalogProps) => {
+const ProductCatalog = ({ products, dispatch }: ProductCatalogProps) => {
   return (
     <>
       {products.map((product) => (
         <ProductCard
           product={product}
           key={product.id}
-          onChangeCard={handleChangeCard}
+          onChangeCard={dispatch}
         />
       ))}
     </>

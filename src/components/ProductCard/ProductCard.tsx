@@ -1,34 +1,28 @@
 import classes from "./Product.module.scss";
-import { FC, useState } from "react";
 import { Product } from "@/types/product";
 import { Button } from "@/components";
 import { default as ChangeCount } from "./components/ChangeCount";
+import {
+  CardActionType,
+  CardAction,
+} from "@/pages/components/CatalogPage/types";
 
 type ProductProps = {
   product: Product;
   type?: "default" | "sale";
-  onChangeCard: (product: Product) => void;
+  onChangeCard: React.Dispatch<CardAction>;
 };
 
 const ProductCard = ({ product, onChangeCard }: ProductProps) => {
   const { price, isFavorite, rating, discount, count } = product;
   const handleAddCard = () => {
-    onChangeCard({
-      ...product,
-      count: product.count ? product.count + 1 : 1,
-    });
+    onChangeCard({ type: CardActionType.ADD_ITEM, payload: product });
   };
   const handleDecrementCard = () => {
-    onChangeCard({
-      ...product,
-      count: product.count && product.count > 0 ? product.count - 1 : 0,
-    });
+    onChangeCard({ type: CardActionType.REMOVE_ITEM, payload: product });
   };
   const handleFavoriteClick = () => {
-    onChangeCard({
-      ...product,
-      isFavorite: !product.isFavorite,
-    });
+    console.log("doesnt work");
   };
   const imgHeartRed =
     "https://i.pinimg.com/736x/c6/ad/36/c6ad365e4e02ded1e1ec801a3ec03fad.jpg";
