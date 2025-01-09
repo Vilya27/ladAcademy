@@ -1,0 +1,32 @@
+$dark: "dark";
+$light: "light";
+
+$color-white-100: #fff;
+$color-black-100: #000;
+$color-primary-100: #76747481;
+$color-secondary-100: #fec0c09d;
+.theme {
+  &__#{$dark} {
+    background-color: $color-primary-100;
+    color: $color-white-100;
+  }
+  &__#{$light} {
+    background-color: $color-secondary-100;
+    color: $color-black-100;
+  }
+}
+
+.checkbox-monochrome {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.checkbox-monochrome + label {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  border: 1px solid grey;
+  background-color: #fff;
+  accent-color: red;
+}

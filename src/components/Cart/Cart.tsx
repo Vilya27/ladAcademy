@@ -5,7 +5,7 @@ import { CardAction } from "@/pages/components/CatalogPage/types";
 import { Button } from "../Button/Button";
 import { CardActionType } from "@/pages/components/CatalogPage/types";
 
-type CartProps = {
+export type CartProps = {
   products: Array<Product>;
   dispatch: React.Dispatch<CardAction>;
 };

@@ -2,13 +2,13 @@
 // import { CatalogPage } from "@/pages/index";
 import React from "react";
 import { CatalogPage } from "./pages";
-import { default as Counter } from "@/components/Counter/Counter";
+import { default as ThemeChanger } from "@/components/ThemeChanger/ThemeChanger";
 
 const App = () => {
   return (
     <React.Fragment>
+      <ThemeChanger />
       <CatalogPage />
-      {/* <Counter /> */}
     </React.Fragment>
   );
 };
