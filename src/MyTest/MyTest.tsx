@@ -1,20 +1,38 @@
 import { Button } from "@/components";
-import TextInput from "@/TextInput/TextInput";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const MyTest = () => {
-  const [counter, setCounter] = useState<number>(0);
-  const prevCounterRef = useRef<number>(0);
+  const [c, setC] = useState(0);
+  const [a, setA] = useState(0);
+  const [d, setD] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setD((prev) => prev + 1);
+      console.log("worked");
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   return (
     <>
+      {c}
       <Button
         onClick={() => {
-          prevCounterRef.current = counter;
-          setCounter((prev) => prev + 1);
+          setC((prev) => prev + 1);
         }}
       >
-        Значение {counter}
+        +
       </Button>
+      {a}
+      <Button
+        onClick={() => {
+          setA((prev) => prev + 1);
+        }}
+      >
+        +
+      </Button>
+      {d}
     </>
   );
 };
