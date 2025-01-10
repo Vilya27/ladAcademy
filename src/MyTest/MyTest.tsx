@@ -1,18 +1,19 @@
 import { Button } from "@/components";
 import TextInput from "@/TextInput/TextInput";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const MyTest = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [counter, setCounter] = useState<number>(0);
+  const prevCounterRef = useRef<number>(0);
   return (
     <>
-      <TextInput label="Тестовый инпут" ref={inputRef} />
       <Button
         onClick={() => {
-          inputRef.current?.focus();
+          prevCounterRef.current = counter;
+          setCounter((prev) => prev + 1);
         }}
       >
-        Установить
+        Значение {counter}
       </Button>
     </>
   );
