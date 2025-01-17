@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { getPosts, getPost } from "@/services/post";
-import { Button } from "@mui/material";
+import { getUsers } from "@/services/users";
+import { useQuery } from "@tanstack/react-query";
+import { Button } from "../Button/Button";
 export type Post = {
   userID: number;
   id: number;
@@ -8,46 +10,44 @@ export type Post = {
   body: string;
 };
 const PostsList = () => {
-  const [posts, setPosts] = useState<Array<Post>>([]);
-  const [post, setPost] = useState<Post>();
-  const controllerRef = useRef<AbortController>(null);
-  useEffect(() => {
-    // if (controllerRef.current === null) {
-    controllerRef.current = new AbortController();
-    // }
-
-    const controller = new AbortController();
-    const fetchPosts = async () => {
-      try {
-        const { data } = await getPosts({
-          signal: controllerRef.current?.signal,
-        });
-        setPosts(data);
-      } catch (e) {
-        if (e instanceof Error) {
-          console.log(e.message);
-        }
-      } finally {
-        console.log("Запрос завершен");
-      }
-    };
-    fetchPosts();
-    return () => {
-      controllerRef.current?.abort();
-    };
-  }, []);
+  const {} = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
+  const {
+    data: posts,
+    error,
+    isLoading,
+    isError,
+    isStale,
+    isFetching,
+    refetch,
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: getPosts,
+    retry: 1,
+    retryDelay: (failureCount) => {
+      console.log(failureCount);
+      return (1000 * 2) ^ failureCount;
+    },
+    staleTime: 10000,
+    // refetchInterval: 3000,
+    gcTime: 5000,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    enabled: false,
+  });
   return (
     <div>
       <h1>PostsList</h1>
-      {post?.title}
+      {isLoading && <h2>Loading...</h2>}
+      {isError && <h2>Ошибка: {error.message}</h2>}
+      {isFetching && <h2>Идет обновдение данных...</h2>}
       <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
+        {posts &&
+          posts.slice(0, 4).map((post) => <li key={post.id}>{post.title}</li>)}
       </ul>
-      <Button onClick={() => controllerRef.current?.abort()}>
-        Остановить запрос
-      </Button>
+      <Button onClick={() => refetch()}>Перезагрузить данные</Button>
     </div>
   );
 };

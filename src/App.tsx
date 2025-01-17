@@ -1,26 +1,35 @@
 // import { Button, Profile, ProductCard, ProductCatalog } from "@/components";
 // import { CatalogPage } from "@/pages/index";
 import React, { useState } from "react";
-import { CatalogPage } from "./pages";
-import { default as ThemeChanger } from "@/components/ThemeChanger/ThemeChanger";
-import { default as MyTest } from "./MyTest/MyTest";
-import Timer from "./components/Timer/Timer";
-import { Button } from "./components";
+import { Button, ProductCard } from "./components";
 import PostsList from "./components/PostsList/PostsList";
+import PublicLayout from "./layout/PublicLayout";
 
 const App = () => {
-  const [isVisibleTimer, setIsVisibleTimer] = useState(false);
+  const [isVisibleTimer1, setIsVisibleTimer1] = useState(false);
+  const [isVisibleTimer2, setIsVisibleTimer2] = useState(false);
   return (
     <React.Fragment>
-      {isVisibleTimer && <PostsList />}
-
-      <Button
-        onClick={() => {
-          setIsVisibleTimer((prevState) => !prevState);
-        }}
-      >
-        Показать
-      </Button>
+      <PublicLayout>
+        {isVisibleTimer1 && <PostsList />}
+        <Button
+          onClick={() => {
+            setIsVisibleTimer1((prevState) => !prevState);
+          }}
+        >
+          Показать
+        </Button>
+      </PublicLayout>
+      <PublicLayout>
+        {isVisibleTimer2 && <PostsList />}
+        <Button
+          onClick={() => {
+            setIsVisibleTimer2((prevState) => !prevState);
+          }}
+        >
+          Показать
+        </Button>
+      </PublicLayout>
     </React.Fragment>
   );
 };
