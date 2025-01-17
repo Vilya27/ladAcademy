@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-
-type Post = {
+import { useEffect, useRef, useState } from "react";
+import { getPosts, getPost } from "@/services/post";
+import { Button } from "@mui/material";
+export type Post = {
   userID: number;
   id: number;
   title: string;
@@ -8,16 +9,19 @@ type Post = {
 };
 const PostsList = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
+  const [post, setPost] = useState<Post>();
+  const controllerRef = useRef<AbortController>(null);
   useEffect(() => {
-    const getPosts = async () => {
+    // if (controllerRef.current === null) {
+    controllerRef.current = new AbortController();
+    // }
+
+    const controller = new AbortController();
+    const fetchPosts = async () => {
       try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/posts",
-          {
-            method: "get",
-          }
-        );
-        const data = await response.json();
+        const { data } = await getPosts({
+          signal: controllerRef.current?.signal,
+        });
         setPosts(data);
       } catch (e) {
         if (e instanceof Error) {
@@ -27,17 +31,26 @@ const PostsList = () => {
         console.log("Запрос завершен");
       }
     };
-    getPosts();
+    fetchPosts();
+    return () => {
+      controllerRef.current?.abort();
+    };
   }, []);
   return (
     <div>
       <h1>PostsList</h1>
+      {post?.title}
       <ul>
         {posts.map((post) => (
           <li key={post.id}>{post.title}</li>
         ))}
       </ul>
+      <Button onClick={() => controllerRef.current?.abort()}>
+        Остановить запрос
+      </Button>
     </div>
   );
 };
 export default PostsList;
+
+// usereducer, usecontext, useeffect, usestate, useref, props
